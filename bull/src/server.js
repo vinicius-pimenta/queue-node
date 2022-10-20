@@ -1,19 +1,24 @@
 import 'dotenv/config'
 import express from 'express'
 import UserController from './app/controllers/UserController'
-import { createBullBoard } from 'bull-board'
-const { BullAdapter } = require('bull-board/bullAdapter')
+import { createBullBoard } from '@bull-board/api'
+import { BullAdapter } from '@bull-board/api/bullAdapter'
+import { ExpressAdapter } from '@bull-board/express'
 import Queue from './app/lib/Queue'
 
+const serverAdapter = new ExpressAdapter()
+serverAdapter.setBasePath('/admin/queues')
+
 const app = express()
-const { router } = createBullBoard(Queue.queues.map(queue => new BullAdapter(queue.bull)))
+
+createBullBoard({ queues: Queue.queues.map(queue => new BullAdapter(queue.bull)), serverAdapter })
 
 app.use(express.json())
 
 app.post('/users', UserController.store)
 
-app.use('/admin/queues', router)
+app.use('/admin/queues', serverAdapter.getRouter())
 
-app.listen(3333, () => {
-  console.log('Server running on localhost:3333')
+app.listen(5555, () => {
+  console.log('Server running on localhost:5555')
 })
