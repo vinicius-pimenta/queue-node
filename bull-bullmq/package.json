@@ -9,9 +9,12 @@
     "npm-run-all": "^4.1.5",
     "sucrase": "^3.28.0",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "prisma": "^3.8.1"
   },
   "dependencies": {
+    "axios": "^0.25.0",
+    "@prisma/client": "^3.8.1",
     "@bull-board/express": "^4.6.0",
     "@types/nodemailer": "^6.4.6",
     "bull": "^4.10.1",
@@ -25,6 +28,7 @@
     "dev2": "npm-run-all -p dev:server dev:bullmq",
     "dev:server": "nodemon src/server.ts",
     "dev:bull": "nodemon src/server-bull.ts",
-    "dev:bullmq": "nodemon src/server-bullmq.ts"
+    "dev:bullmq": "nodemon src/server-bullmq.ts",
+    "stress": "tsnd --transpile-only --ignore-watch node_modules src/app/requestHandler/stress.ts"
   }
 }
