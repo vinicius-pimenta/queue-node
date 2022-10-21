@@ -19,6 +19,6 @@ app.post('/users', UserController.store)
 
 app.use('/admin/queues', serverAdapter.getRouter())
 
-app.listen(5555, () => {
-  console.log('Server running on localhost:5555')
+app.listen(3333, () => {
+  console.log('Server running on localhost:3333')
 })
