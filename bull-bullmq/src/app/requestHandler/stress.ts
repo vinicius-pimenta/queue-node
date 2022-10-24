@@ -4,7 +4,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3333';
 
 let MAX_REQUESTS = 50
-let SLEEP_TIME = 1
+let SLEEP_TIME = 3
 
 if (process.env.NUMBER_OF_REQUESTS) {
   MAX_REQUESTS = parseInt(process.env.NUMBER_OF_REQUESTS)
@@ -34,6 +34,7 @@ async function handle() {
 
     requests.push(
       axios.post('/users', {
+        "name": `${i+1} Vinicius`,
         "email": "vinicius@email.com",
         "password": "123456"
       }).then((res) => {

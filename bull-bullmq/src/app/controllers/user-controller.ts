@@ -16,8 +16,10 @@ export class UserController {
       password
     }
 
+    console.log({user})
+
     this.queueProvider.add('RegistrationMail', { user })
-    this.queueProvider.add('UserReport', { user })
+    // this.queueProvider.add('UserReport', { user })
 
     return res.json(user)
   }

@@ -1,5 +1,5 @@
 import { prisma } from '../../config/prisma'
-import Mail from '../lib/Mail'
+// import Mail from '../lib/Mail'
 
 export default {
   key: 'RegistrationMail',
@@ -23,11 +23,19 @@ export default {
       }
     })
 
-    await Mail.sendMail({
-      from: 'Queue Test <queue@queuetest.com.br>',
-      to: `${user.name} <${user.email}>`,
-      subject: 'Cadastro de usuário',
-      html: `Olá, ${user.name}, bem-vindo ao sistema de filas :D`
+    await prisma.user.create({
+      data: {
+        email: user.email,
+        name: user.name,
+        password: user.password
+      }
     })
+
+    // await Mail.sendMail({
+    //   from: 'Queue Test <queue@queuetest.com.br>',
+    //   to: `${user.name} <${user.email}>`,
+    //   subject: 'Cadastro de usuário',
+    //   html: `Olá, ${user.name}, bem-vindo ao sistema de filas :D`
+    // })
   }
 }
